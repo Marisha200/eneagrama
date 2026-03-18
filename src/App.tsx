@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import { questions, typesData, EnneagramType } from './data';
 
-type AppState = 'home' | 'test' | 'results' | 'explore' | 'explore-all';
+type AppState = 'home' | 'about' | 'test' | 'results' | 'explore' | 'explore-all';
 
 export default function App() {
   const [state, setState] = useState<AppState>('home');
@@ -409,6 +409,76 @@ export default function App() {
     );
   };
 
+  const renderAbout = () => (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="max-w-3xl mx-auto py-12 px-6"
+    >
+      <div className="text-center mb-16">
+        <h1 className="text-4xl md:text-5xl font-serif font-light text-stone-800 mb-6">¿Qué es el Eneagrama?</h1>
+        <p className="text-lg text-stone-500 italic max-w-2xl mx-auto">
+          "Un mapa para encontrarte, no para encerrarte."
+        </p>
+      </div>
+
+      <div className="space-y-12 text-stone-700 leading-relaxed">
+        <section>
+          <h2 className="text-2xl font-serif text-stone-800 mb-4">Un espejo de la personalidad</h2>
+          <p className="mb-4">
+            El Eneagrama es un sistema de tipología de la personalidad que describe nueve patrones de pensamiento, sentimiento y acción. Pero no es una clasificación estática; es un mapa dinámico que explica por qué hacemos lo que hacemos y cómo podemos evolucionar.
+          </p>
+          <p>
+            En su esencia, el Eneagrama nos muestra que nuestra "personalidad" es en realidad una estructura defensiva (el Ego) que construimos en la infancia para protegernos y navegar el mundo. Al identificar nuestro patrón, podemos empezar a ver a través de él y reconectar con nuestra verdadera naturaleza.
+          </p>
+        </section>
+
+        <section className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm">
+          <h2 className="text-2xl font-serif text-stone-800 mb-4">Un poco de historia</h2>
+          <p className="mb-4">
+            Los orígenes exactos del símbolo del Eneagrama son un misterio, con raíces que algunos rastrean hasta tradiciones místicas antiguas de Oriente Medio y la Grecia clásica. Sin embargo, su aplicación a la psicología de la personalidad es un desarrollo más reciente.
+          </p>
+          <p className="mb-4">
+            A principios del siglo XX, el símbolo fue introducido en Occidente como una herramienta de autoconocimiento. Décadas más tarde, diversos investigadores y psicólogos transpersonales comenzaron a mapear los nueve tipos de personalidad sobre el símbolo, integrando la sabiduría antigua con la psicología moderna.
+          </p>
+          <p>
+            Hoy, el Eneagrama es utilizado en todo el mundo por psicólogos, coaches y buscadores espirituales como una de las herramientas más potentes para el desarrollo humano y la inteligencia emocional.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-serif text-stone-800 mb-4">¿Cómo funciona?</h2>
+          <p className="mb-6">
+            El sistema se basa en tres centros de inteligencia:
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 rounded-2xl bg-stone-50 border border-stone-100">
+              <h3 className="font-bold text-stone-800 mb-2 uppercase tracking-widest text-xs">Centro Instintivo</h3>
+              <p className="text-sm">Enfocado en la acción, la autonomía y la ira. (Tipos 8, 9 y 1)</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-stone-50 border border-stone-100">
+              <h3 className="font-bold text-stone-800 mb-2 uppercase tracking-widest text-xs">Centro Emocional</h3>
+              <p className="text-sm">Enfocado en la relación, la imagen y la tristeza. (Tipos 2, 3 y 4)</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-stone-50 border border-stone-100">
+              <h3 className="font-bold text-stone-800 mb-2 uppercase tracking-widest text-xs">Centro Mental</h3>
+              <p className="text-sm">Enfocado en la seguridad, el análisis y el miedo. (Tipos 5, 6 y 7)</p>
+            </div>
+          </div>
+        </section>
+
+        <div className="text-center pt-8">
+          <button 
+            onClick={() => setState('test')}
+            className="bg-stone-800 text-stone-50 px-10 py-4 rounded-full text-lg font-medium hover:bg-stone-700 transition-all shadow-lg"
+          >
+            Descubrí tu patrón
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+
   const renderExploreAll = () => (
     <div className="max-w-6xl mx-auto py-12 px-6">
       <div className="text-center mb-16">
@@ -452,6 +522,7 @@ export default function App() {
           
           <div className="hidden md:flex items-center gap-8">
             <button onClick={() => setState('home')} className={`text-sm font-medium transition-colors ${state === 'home' ? 'text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}>Inicio</button>
+            <button onClick={() => setState('about')} className={`text-sm font-medium transition-colors ${state === 'about' ? 'text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}>¿Qué es?</button>
             <button onClick={() => setState('explore-all')} className={`text-sm font-medium transition-colors ${state === 'explore-all' ? 'text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}>Explorar Tipos</button>
             <button onClick={() => setState('test')} className="bg-stone-800 text-stone-50 px-5 py-2 rounded-full text-sm font-medium hover:bg-stone-700 transition-all">Hacer Test</button>
           </div>
@@ -473,6 +544,7 @@ export default function App() {
           >
             <div className="flex flex-col p-6 gap-4">
               <button onClick={() => { setState('home'); setIsMenuOpen(false); }} className="text-left py-2 font-medium">Inicio</button>
+              <button onClick={() => { setState('about'); setIsMenuOpen(false); }} className="text-left py-2 font-medium">¿Qué es?</button>
               <button onClick={() => { setState('explore-all'); setIsMenuOpen(false); }} className="text-left py-2 font-medium">Explorar Tipos</button>
               <button onClick={() => { setState('test'); setIsMenuOpen(false); }} className="text-left py-2 font-medium text-stone-500">Hacer Test</button>
             </div>
@@ -483,6 +555,7 @@ export default function App() {
       {/* Main Content */}
       <main className="pb-24">
         {state === 'home' && renderHome()}
+        {state === 'about' && renderAbout()}
         {state === 'test' && renderTest()}
         {state === 'results' && renderResults()}
         {state === 'explore' && selectedTypeId && renderTypeDetail(selectedTypeId)}
